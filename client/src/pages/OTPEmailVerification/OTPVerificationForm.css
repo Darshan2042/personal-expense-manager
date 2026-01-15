@@ -1,0 +1,393 @@
+/* Auth page wrapper to ensure full background coverage */
+.auth-page-wrapper {
+  min-height: 100vh;
+  width: 100%;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+.otp-content {
+  min-height: 100vh;
+  width: 100%;
+  background: transparent;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-lg);
+  padding-top: calc(var(--spacing-lg) + 60px);
+  z-index: 0;
+}
+
+.auth-page-wrapper::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+  animation: rotate 20s linear infinite;
+  z-index: 0;
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.otp-verification-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 500px;
+  position: relative;
+  z-index: 2;
+}
+
+.otp-verification-form {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(20px);
+  padding: var(--spacing-2xl);
+  border-radius: var(--radius-xl);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  width: 100%;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  animation: fadeIn 0.6s ease-out;
+  transition: all var(--transition-base);
+}
+
+.otp-verification-form:hover {
+  box-shadow: 0 25px 70px rgba(0, 0, 0, 0.35);
+  transform: translateY(-5px);
+}
+
+.otp-verification-form h2 {
+  text-align: center;
+  font-weight: 700;
+  padding-top: 0;
+  margin-bottom: var(--spacing-md);
+  background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-size: 2rem;
+}
+
+.otp-verification-form .header-name {
+  border-bottom: 3px solid;
+  border-image: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%) 1;
+  padding-bottom: var(--spacing-md);
+  margin-bottom: var(--spacing-xl);
+}
+
+.otp-description {
+  text-align: center;
+  color: var(--text-secondary);
+  font-family: "Roboto", sans-serif;
+  margin-bottom: var(--spacing-lg);
+  line-height: 1.6;
+}
+
+.otp-verification-form a {
+  color: var(--primary-color) !important;
+  text-decoration: none;
+  font-weight: 500;
+  transition: all var(--transition-fast);
+}
+
+.otp-verification-form a:hover {
+  color: var(--primary-dark) !important;
+  text-decoration: underline;
+}
+
+/* Modern Input Styling - Same as Request Admin Access */
+.otp-verification-form .ant-form-item-label > label {
+  color: var(--text-primary);
+  font-weight: 500;
+  font-size: 0.95rem;
+}
+
+.otp-verification-form .form-input {
+  border-radius: var(--radius-md);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  transition: all var(--transition-base);
+  background: rgba(255, 255, 255, 0.9);
+}
+
+.otp-verification-form .form-input:hover {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 2px rgba(102, 126, 234, 0.1);
+}
+
+.otp-verification-form .form-input:focus,
+.otp-verification-form .form-input.ant-input-affix-wrapper-focused {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 2px rgba(102, 126, 234, 0.2);
+}
+
+.otp-verification-form .form-input .ant-input-prefix {
+  color: var(--primary-color);
+  margin-right: var(--spacing-sm);
+}
+
+/* Disabled input styling */
+.otp-verification-form .form-input.ant-input-affix-wrapper-disabled {
+  background-color: var(--gray-100);
+  cursor: not-allowed;
+  opacity: 0.7;
+  border-color: var(--gray-200);
+}
+
+.otp-verification-form .form-input.ant-input-affix-wrapper-disabled .ant-input-prefix {
+  color: var(--gray-400);
+}
+
+.otp-verification-form .pass-input .ant-input-prefix,
+.otp-verification-form .ant-input-affix-wrapper .ant-input-prefix {
+  color: var(--primary-color);
+  margin-right: var(--spacing-sm);
+}
+
+
+.otp-verification-form .pass-input {
+  border-radius: var(--radius-lg);
+}
+
+.otp-verification-form button,
+.otp-verification-form .btn {
+  margin-top: var(--spacing-md);
+  width: 100%;
+  background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+  color: var(--text-white);
+  outline: none;
+  border: none;
+  padding: var(--spacing-md);
+  border-radius: var(--radius-md);
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all var(--transition-base);
+  box-shadow: var(--shadow-md);
+}
+
+.otp-verification-form button:hover,
+.otp-verification-form .btn:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+  background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary-color) 100%);
+}
+
+.otp-verification-form button:disabled,
+.otp-verification-form .btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.otp-verification-form .text {
+  color: var(--text-secondary) !important;
+  text-decoration: none;
+  font-size: 0.95rem;
+}
+
+.otp-verification-form .text a {
+  color: var(--primary-color) !important;
+  text-decoration: none;
+  font-weight: 500;
+  transition: all var(--transition-fast);
+  margin-left: 5px;
+}
+
+.otp-verification-form .text a:hover {
+  color: var(--primary-dark) !important;
+  text-decoration: underline;
+}
+
+.loading-text {
+  margin-top: var(--spacing-lg);
+}
+
+/* OTP Input Component Styling - Only target OTP inputs with specific class */
+.otp-verification-form .otp-input-container {
+  margin: var(--spacing-md) 0 !important;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+/* Only style OTP inputs with the specific class - completely isolated from regular inputs */
+.otp-verification-form .otp-input-container .ant-row {
+  margin: 0 !important;
+  width: 100% !important;
+  display: flex !important;
+  flex-wrap: nowrap !important;
+  justify-content: center !important;
+  gap: 8px !important;
+}
+
+/* Ensure Col components don't wrap and stay in one line */
+.otp-verification-form .otp-input-container .ant-col {
+  flex: 0 0 auto !important;
+  max-width: none !important;
+  padding: 0 !important;
+}
+
+.otp-verification-form .otp-input-container .otp-single-input,
+.otp-verification-form .otp-input-container .ant-col .ant-input {
+  width: 50px !important;
+  height: 50px !important;
+  min-width: 50px !important;
+  max-width: 50px !important;
+  text-align: center !important;
+  font-size: 1.5rem !important;
+  font-weight: 600 !important;
+  border: 2px solid var(--gray-200) !important;
+  border-radius: var(--radius-md) !important;
+  transition: all var(--transition-base) !important;
+  background: var(--bg-primary) !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05) !important;
+  flex-shrink: 0 !important;
+}
+
+.otp-verification-form .otp-input-container .otp-single-input:hover,
+.otp-verification-form .otp-input-container .ant-col .ant-input:hover {
+  border-color: var(--primary-light) !important;
+  box-shadow: 0 2px 6px rgba(99, 102, 241, 0.15) !important;
+}
+
+.otp-verification-form .otp-input-container .otp-single-input:focus,
+.otp-verification-form .otp-input-container .ant-col .ant-input:focus {
+  border-color: var(--primary-color) !important;
+  box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.1), 0 4px 12px rgba(99, 102, 241, 0.15) !important;
+  outline: none !important;
+}
+
+
+@media screen and (max-width: 992px) {
+  .otp-content {
+    padding: var(--spacing-md);
+  }
+
+  .otp-verification-form {
+    padding: var(--spacing-xl);
+    max-width: 90%;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .otp-content {
+    padding: var(--spacing-sm);
+    padding-top: calc(var(--spacing-md) + 60px);
+    min-height: 100vh;
+  }
+
+  .otp-verification-form {
+    padding: var(--spacing-lg);
+    max-width: 100%;
+  }
+
+  .otp-verification-form h2 {
+    font-size: 1.75rem;
+    margin-bottom: var(--spacing-lg);
+  }
+
+  .otp-verification-form .ant-input,
+  .otp-verification-form .ant-input-password {
+    padding: 12px 14px;
+    font-size: 0.95rem;
+  }
+
+  .otp-verification-form .ant-input-affix-wrapper .ant-input {
+    padding: 12px 14px;
+  }
+
+
+  .otp-verification-form .otp-input-container .otp-single-input,
+  .otp-verification-form .otp-input-container .ant-col .ant-input {
+    width: 45px !important;
+    height: 45px !important;
+    min-width: 45px !important;
+    max-width: 45px !important;
+    font-size: 1.3rem !important;
+  }
+  
+  /* Ensure Row doesn't wrap on tablets */
+  .otp-verification-form .otp-input-container .ant-row {
+    flex-wrap: nowrap !important;
+    gap: 6px !important;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .otp-content {
+    padding: var(--spacing-xs);
+    padding-top: calc(var(--spacing-sm) + 60px);
+  }
+
+  .otp-verification-form {
+    padding: var(--spacing-md);
+    border-radius: var(--radius-lg);
+  }
+
+  .otp-verification-form h2 {
+    font-size: 1.5rem;
+    margin-bottom: var(--spacing-md);
+  }
+
+  .otp-verification-form .ant-input,
+  .otp-verification-form .ant-input-password {
+    padding: 10px 12px;
+    font-size: 16px;
+  }
+
+  .otp-verification-form .ant-input-affix-wrapper .ant-input {
+    padding: 10px 12px;
+  }
+
+  .otp-verification-form button,
+  .otp-verification-form .btn {
+    padding: var(--spacing-sm);
+    font-size: 0.95rem;
+  }
+
+  .otp-verification-form .text {
+    font-size: 0.9rem;
+  }
+
+  .otp-verification-form .otp-input-container .otp-single-input,
+  .otp-verification-form .otp-input-container .ant-col .ant-input {
+    width: 40px !important;
+    height: 40px !important;
+    min-width: 40px !important;
+    max-width: 40px !important;
+    font-size: 1.2rem !important;
+    margin: 0 !important;
+  }
+  
+  /* Ensure Row doesn't wrap on mobile */
+  .otp-verification-form .otp-input-container .ant-row {
+    flex-wrap: nowrap !important;
+    gap: 4px !important;
+  }
+  
+  /* Make container scrollable horizontally if needed on very small screens */
+  .otp-verification-form .otp-input-container {
+    overflow-x: auto;
+    overflow-y: hidden;
+  }
+  
+  .otp-verification-form .otp-input-container .ant-row {
+    min-width: fit-content;
+  }
+}

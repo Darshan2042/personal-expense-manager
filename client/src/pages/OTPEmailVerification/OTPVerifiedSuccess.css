@@ -2,9 +2,10 @@
 .auth-page-wrapper {
   min-height: 100vh;
   width: 100%;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #0F172A 0%, #1E293B 50%, #334155 100%);
   position: relative;
   overflow: hidden;
+  animation: rotateGlow 20s ease-in-out infinite;
 }
 
 .otp-content {
@@ -19,6 +20,7 @@
   padding: var(--spacing-lg);
   padding-top: calc(var(--spacing-lg) + 60px);
   z-index: 0;
+  animation: fadeInUp 0.8s cubic-bezier(0.4, 0, 0.2, 1) both;
 }
 
 .auth-page-wrapper::before {

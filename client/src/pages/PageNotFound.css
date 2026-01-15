@@ -3,25 +3,40 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: var(--spacing-2xl);
-  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-  animation: fadeIn 0.5s ease-out;
+  padding: var(--spacing-3xl);
+  background: linear-gradient(135deg, #0F172A 0%, #1E293B 50%, #334155 100%);
+  position: relative;
+  overflow: hidden;
+  animation: fadeIn 0.8s cubic-bezier(0.4, 0, 0.2, 1) both;
+}
+
+.page-not-found-container::before {
+  content: '';
+  position: absolute;
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, rgba(6, 182, 212, 0.15) 0%, transparent 70%);
+  border-radius: 50%;
+  animation: float 8s ease-in-out infinite;
 }
 
 .page-not-found-title {
-  font-size: 6rem;
-  font-weight: 800;
-  background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+  font-size: 8rem;
+  font-weight: 900;
+  background: linear-gradient(135deg, #06B6D4 0%, #8B5CF6 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
   display: block;
+  animation: scaleIn 1s cubic-bezier(0.4, 0, 0.2, 1) both;
+  text-shadow: 0 0 80px rgba(6, 182, 212, 0.5);
 }
 
 .page-not-found-subtitle {
-  font-size: 1.25rem;
-  color: var(--text-secondary);
+  font-size: 1.5rem;
+  color: rgba(255, 255, 255, 0.9);
   font-weight: 500;
+  animation: fadeInUp 1s cubic-bezier(0.4, 0, 0.2, 1) 0.3s both;
 }
 
 @media screen and (max-width: 768px) {

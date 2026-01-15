@@ -3,11 +3,16 @@
   min-height: 100vh;
   width: 100%;
   max-width: 100vw;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #0F172A 0%, #1E293B 50%, #334155 100%);
   position: relative;
   overflow: hidden;
   overflow-x: hidden;
+  animation: rotateGlow 20s ease-in-out infinite;
 }
+
+/* ============================================
+   ULTRA-MODERN REGISTER PAGE
+   ============================================ */
 
 .register-content {
   min-height: 100vh;
@@ -20,32 +25,11 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: var(--spacing-lg);
-  padding-top: calc(var(--spacing-lg) + 60px); /* Account for header height */
+  padding: var(--spacing-xl);
+  padding-top: calc(var(--spacing-xl) + 80px);
+  padding-bottom: var(--spacing-xl);
   z-index: 0;
   box-sizing: border-box;
-}
-
-.auth-page-wrapper::before {
-  content: '';
-  position: absolute;
-  top: -50%;
-  right: -50%;
-  width: 200%;
-  height: 200%;
-  background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
-  animation: rotate 20s linear infinite;
-  z-index: 0;
-  pointer-events: none;
-}
-
-@keyframes rotate {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
 }
 
 .register-page {
@@ -54,54 +38,102 @@
   align-items: center;
   justify-content: center;
   width: 100%;
-  max-width: 600px;
+  max-width: 640px;
   position: relative;
   z-index: 2;
   padding: var(--spacing-xl) 0;
+  animation: fadeInUp 0.8s cubic-bezier(0.4, 0, 0.2, 1) both;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .register-form {
   background: rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(20px);
-  padding: var(--spacing-2xl);
-  border-radius: var(--radius-xl);
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(30px);
+  padding: var(--spacing-3xl);
+  border-radius: var(--radius-2xl);
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.6);
   width: 100%;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  animation: fadeIn 0.6s ease-out;
+  border: 1px solid rgba(6, 182, 212, 0.2);
+  animation: fadeInScale 0.7s cubic-bezier(0.4, 0, 0.2, 1) 0.2s both;
   transition: all var(--transition-base);
-  max-height: 90vh;
+  max-height: 85vh;
   overflow-y: auto;
+  position: relative;
+}
+
+@keyframes fadeInScale {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.register-form::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #06B6D4 0%, #8B5CF6 100%);
 }
 
 .register-form:hover {
-  box-shadow: 0 25px 70px rgba(0, 0, 0, 0.35);
-  transform: translateY(-5px);
+  box-shadow: 0 35px 90px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.7);
+  transform: translateY(-6px);
+  border-color: rgba(6, 182, 212, 0.4);
 }
 
 .register-form h2 {
   text-align: center;
-  font-weight: 700;
+  font-weight: 900;
   padding-top: 0;
-  margin-bottom: var(--spacing-xl);
-  background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+  margin-bottom: var(--spacing-2xl);
+  background: linear-gradient(135deg, #0F172A 0%, #06B6D4 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  font-size: 2rem;
+  font-size: 2.5rem;
+  letter-spacing: -0.02em;
 }
 
 .register-form .header-name {
-  border-bottom: 3px solid;
-  border-image: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%) 1;
+  border-bottom: none;
   padding-bottom: var(--spacing-md);
-  margin-bottom: var(--spacing-xl);
+  margin-bottom: var(--spacing-2xl);
+  position: relative;
+}
+
+.register-form .header-name::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 4px;
+  background: linear-gradient(90deg, #06B6D4 0%, #8B5CF6 100%);
+  border-radius: var(--radius-full);
 }
 
 .register-form a {
   color: var(--primary-color) !important;
   text-decoration: none;
-  font-weight: 500;
+  font-weight: 600;
   transition: all var(--transition-fast);
 }
 
@@ -110,77 +142,116 @@
   text-decoration: underline;
 }
 
-/* Modern Input Styling - Same as Request Admin Access */
+/* ============================================
+   MODERN INPUT STYLING - ENHANCED
+   ============================================ */
+
+.register-form .ant-form-item {
+  margin-bottom: var(--spacing-lg);
+}
+
 .register-form .ant-form-item-label > label {
   color: var(--text-primary);
-  font-weight: 500;
-  font-size: 0.95rem;
+  font-weight: 600;
+  font-size: 1rem;
 }
 
 .register-form .form-input {
-  border-radius: var(--radius-md);
-  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: var(--radius-lg);
+  border: 2px solid rgba(6, 182, 212, 0.2);
   transition: all var(--transition-base);
-  background: rgba(255, 255, 255, 0.9);
+  background: rgba(255, 255, 255, 0.95);
+  font-size: 1rem;
+  padding: 12px 16px;
 }
 
 .register-form .form-input:hover {
-  border-color: var(--primary-color);
-  box-shadow: 0 0 0 2px rgba(102, 126, 234, 0.1);
+  border-color: var(--primary-light);
+  background: #FFFFFF;
+  box-shadow: 0 2px 8px rgba(139, 92, 246, 0.1);
 }
 
 .register-form .form-input:focus,
 .register-form .form-input.ant-input-affix-wrapper-focused {
   border-color: var(--primary-color);
-  box-shadow: 0 0 0 2px rgba(102, 126, 234, 0.2);
+  background: #FFFFFF;
+  box-shadow: 0 0 0 4px rgba(139, 92, 246, 0.15);
 }
 
 .register-form .form-input .ant-input-prefix {
   color: var(--primary-color);
-  margin-right: var(--spacing-sm);
+  margin-right: var(--spacing-md);
+  font-size: 1.1rem;
 }
 
-
-
 .register-form .ant-input-password-icon {
-  color: var(--gray-500);
+  color: var(--text-secondary);
   transition: all var(--transition-base);
-  padding: 4px;
+  padding: 6px;
   border-radius: var(--radius-sm);
+  font-size: 1.1rem;
 }
 
 .register-form .ant-input-password-icon:hover {
   color: var(--primary-color);
-  background-color: rgba(99, 102, 241, 0.1);
-  transform: scale(1.1);
+  background-color: rgba(139, 92, 246, 0.1);
+  transform: scale(1.15);
 }
 
 .register-form .ant-input-affix-wrapper-focused .ant-input-password-icon {
   color: var(--primary-color);
 }
 
+/* ============================================
+   MODERN BUTTON STYLING - ENHANCED
+   ============================================ */
+
 .register-form .button button,
 .register-form .btn {
-  margin-top: var(--spacing-md);
+  margin-top: var(--spacing-lg);
   width: 100%;
-  background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+  background: linear-gradient(135deg, #0F172A 0%, #06B6D4 100%);
   color: var(--text-white);
   outline: none;
   border: none;
-  padding: var(--spacing-md);
-  border-radius: var(--radius-md);
-  font-weight: 600;
-  font-size: 1rem;
+  padding: var(--spacing-lg);
+  border-radius: var(--radius-xl);
+  font-weight: 700;
+  font-size: 1.1rem;
   cursor: pointer;
   transition: all var(--transition-base);
-  box-shadow: var(--shadow-md);
+  box-shadow: 0 10px 40px rgba(6, 182, 212, 0.4);
+  position: relative;
+  overflow: hidden;
+  letter-spacing: 0.02em;
+}
+
+.register-form .button button::before,
+.register-form .btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  transition: left 0.5s;
+}
+
+.register-form .button button:hover::before,
+.register-form .btn:hover::before {
+  left: 100%;
 }
 
 .register-form .button button:hover,
 .register-form .btn:hover {
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-lg);
-  background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary-color) 100%);
+  transform: translateY(-3px);
+  box-shadow: 0 15px 50px rgba(139, 92, 246, 0.5);
+}
+
+.register-form .button button:active,
+.register-form .btn:active {
+  transform: translateY(-1px);
 }
 
 .register-form .button button:disabled,
@@ -188,17 +259,20 @@
   opacity: 0.6;
   cursor: not-allowed;
   transform: none;
+  box-shadow: var(--shadow-md);
 }
 
 .register-form .text {
   color: var(--text-secondary) !important;
   text-decoration: none;
   font-size: 0.95rem;
+  font-weight: 500;
 }
 
 .link1 {
   text-decoration: underline;
   color: var(--primary-color) !important;
+  font-weight: 600;
 }
 
 .link1:hover {
@@ -208,10 +282,24 @@
 
 .register-form .line {
   position: relative;
-  height: 1px;
+  height: 2px;
   width: 100%;
   margin: var(--spacing-xl) 0;
-  background: linear-gradient(to right, transparent, var(--gray-300), transparent);
+  background: linear-gradient(to right, transparent, rgba(139, 92, 246, 0.2), transparent);
+}
+
+.register-form .line::before {
+  content: "OR";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(255, 255, 255, 0.98);
+  color: var(--text-secondary);
+  padding: 0 var(--spacing-lg);
+  font-weight: 700;
+  font-size: 0.875rem;
+  letter-spacing: 0.1em;
 }
 
 .register-form .line::before {

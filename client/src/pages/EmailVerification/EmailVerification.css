@@ -2,9 +2,10 @@
 .auth-page-wrapper {
   min-height: 100vh;
   width: 100%;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #0F172A 0%, #1E293B 50%, #334155 100%);
   position: relative;
   overflow: hidden;
+  animation: rotateGlow 20s ease-in-out infinite;
 }
 
 .email-verify-content {
@@ -19,6 +20,7 @@
   padding: var(--spacing-lg);
   padding-top: calc(var(--spacing-lg) + 60px);
   z-index: 0;
+  animation: fadeInUp 0.8s cubic-bezier(0.4, 0, 0.2, 1) both;
 }
 
 .auth-page-wrapper::before {
@@ -54,20 +56,35 @@
 }
 
 .email-verify-form {
-  background: rgba(255, 255, 255, 0.95);
+  background: rgba(255, 255, 255, 0.05);
   backdrop-filter: blur(20px);
   padding: var(--spacing-2xl);
   border-radius: var(--radius-xl);
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(6, 182, 212, 0.1);
   width: 100%;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  animation: fadeIn 0.6s ease-out;
+  border: 2px solid rgba(6, 182, 212, 0.3);
+  border-top: 3px solid var(--accent-color);
+  animation: scaleIn 0.6s cubic-bezier(0.4, 0, 0.2, 1) both;
   transition: all var(--transition-base);
+  position: relative;
+  overflow: hidden;
+}
+
+.email-verify-form::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #06B6D4 0%, #8B5CF6 100%);
+  z-index: 1;
 }
 
 .email-verify-form:hover {
-  box-shadow: 0 25px 70px rgba(0, 0, 0, 0.35);
+  box-shadow: 0 25px 70px rgba(6, 182, 212, 0.3), 0 0 0 1px rgba(6, 182, 212, 0.3);
   transform: translateY(-5px);
+  border-color: var(--accent-color);
 }
 
 @keyframes fadeIn {

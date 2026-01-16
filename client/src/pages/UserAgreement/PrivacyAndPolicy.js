@@ -17,7 +17,7 @@ const PrivacyAndPolicy = () => {
               <section className="legal-section">
                 <h2 className="legal-heading">1. Introduction</h2>
                 <p className="legal-text">
-                  Prakash & Company Pvt Ltd ("we," "our," or "us") operates the Expense Management 
+                  Darshan Pawar ("I," "my," or "me") operates the Expense Management 
                   System ("the Service"). This Privacy Policy informs you of our policies regarding 
                   the collection, use, and disclosure of personal data when you use our Service and 
                   the choices you have associated with that data.
@@ -227,10 +227,9 @@ const PrivacyAndPolicy = () => {
                   rights regarding your personal data, please contact us at:
                 </p>
                 <ul className="legal-list">
-                  <li>Email: prakash8873saw@gmail.com</li>
-                  <li>Email: info.prakash.company@gmail.com</li>
-                  <li>Phone: +91 8873323323</li>
-                  <li>Address: Prakash & Company Pvt. Ltd, BCIT Park, Bangalore, Karnataka, India 560064</li>
+                  <li>Name: Darshan Pawar</li>
+                  <li>Email: pawardarshan1204@gmail.com</li>
+                  <li>Portfolio: https://portfolio-website-delta-sand-29.vercel.app/</li>
                 </ul>
               </section>
 

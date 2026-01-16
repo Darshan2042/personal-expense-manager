@@ -1,4 +1,5 @@
 import { Routes, Route, Navigate } from "react-router-dom";
+import { ThemeProvider } from "./contexts/ThemeContext";
 import HomePage from "./pages/HomePage";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
@@ -6,8 +7,6 @@ import PageNotFound from "./pages/PageNotFound";
 import ForgotPassword from "./pages/ForgotPassword/ForgotPassword";
 import ResetPassword from "./pages/ForgotPassword/ResetPassword";
 import EmailSent from "./pages/ForgotPassword/EmailSent";
-import TermsAndConditions from "./pages/UserAgreement/TermsAndConditions";
-import PrivacyAndPolicy from "./pages/UserAgreement/PrivacyAndPolicy";
 import EmailVerification from "./pages/EmailVerification/EmailVerification";
 import PasswordResetSuccess from "./pages/ForgotPassword/PasswordResetSuccess";
 import SignUpSuccess from "./pages/EmailVerification/SignUpSuccess";
@@ -19,11 +18,12 @@ import OTPVerifiedSuccess from "./pages/OTPEmailVerification/OTPVerifiedSuccess"
 import ChangePassword from "./pages/UserDetails/ChangePassword";
 import ContactUs from "./pages/UserDetails/ContactUs";
 import AboutUs from "./pages/UserDetails/AboutUs";
+import Settings from "./pages/UserDetails/Settings";
 import GoogleAuthSuccess from "./pages/GoogleAuthSuccess";
 
 function App() {
   return (
-    <>
+    <ThemeProvider>
       <Routes>
         <Route
           path="/user"
@@ -68,8 +68,6 @@ function App() {
           path="/password-reset-success"
           element={<PasswordResetSuccess />}
         />
-        <Route path="/terms-conditions" element={<TermsAndConditions />} />
-        <Route path="/privacy-policy" element={<PrivacyAndPolicy />} />
         {/* send otp and verify email */}
         <Route
           path="/email-otp-verification"
@@ -83,10 +81,11 @@ function App() {
         <Route path="/otp-verified-success" element={<OTPVerifiedSuccess />} />
         <Route path="/contact-us" element={<ContactUs />} />
         <Route path="/about-us" element={<AboutUs />} />
+        <Route path="/settings" element={<Settings />} />
         {/* if path is not correct then navigate to page not found page */}
         <Route path="*" element={<PageNotFound />} />
       </Routes>
-    </>
+    </ThemeProvider>
   );
 }
 

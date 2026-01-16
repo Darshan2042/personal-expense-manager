@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Form, Input, message, Alert } from "antd";
+import { Form, Input, Alert } from "antd";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { LoadingOutlined, LockOutlined } from "@ant-design/icons";
@@ -48,11 +48,8 @@ const ChangePassword = () => {
       });
       setLoading(false);
       setPasswordChangeError(null);
-      message.success(
-        "Password changed successfully. Redirecting to the login page. Login with new password."
-      );
       setResponseMessage(
-        "Password changed successfully. Redirecting to the login page. Login with new password."
+        "Password changed successfully. Redirecting to the login page. Please login with your new password."
       );
       // first clear the local storage
       localStorage.removeItem("user");
@@ -64,7 +61,6 @@ const ChangePassword = () => {
       setResponseMessage(null);
       setPasswordChangeError(getResponseError(error));
       console.log(error);
-      message.error("Something went wrong in changing password...!");
     }
   };
 

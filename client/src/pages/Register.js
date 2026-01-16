@@ -204,15 +204,7 @@ const Register = () => {
 
               <Form.Item name="remember" valuePropName="checked" noStyle>
                 <Checkbox>
-                  I agree to the{" "}
-                  <Link className="link link1" to="/terms-conditions">
-                    Terms & Conditions
-                  </Link>{" "}
-                  and{" "}
-                  <Link className="link link1" to="/privacy-policy">
-                    Privacy policy
-                  </Link>
-                  .
+                  I agree to the terms and conditions of using this application.
                 </Checkbox>
               </Form.Item>
 

@@ -87,9 +87,9 @@ const ContactUs = () => {
                     <HomeOutlined />
                   </div>
                   <div className="contact-info-content">
-                    <div className="contact-topic">Address</div>
-                    <div className="contact-text">Prakash & Company Pvt. Ltd, BCIT Park</div>
-                    <div className="contact-text">Bangalore, Karnataka, India 560064</div>
+                    <div className="contact-topic">Developer</div>
+                    <div className="contact-text">Darshan Pawar</div>
+                    <div className="contact-text">Full Stack Developer</div>
                   </div>
                 </div>
                 <div className="contact-detail">
@@ -109,13 +109,13 @@ const ContactUs = () => {
                   <div className="contact-info-content">
                     <div className="contact-topic">Email</div>
                     <div className="contact-text">
-                      <a href="mailto:prakash8873saw@gmail.com">
-                        prakash8873saw@gmail.com
+                      <a href="mailto:pawardarshan1204@gmail.com">
+                        pawardarshan1204@gmail.com
                       </a>
                     </div>
-                    <div className="contact-text">
-                      <a href="mailto:info.prakash.company@gmail.com">
-                        info.prakash.company@gmail.com
+                    <div className="contact-links">
+                      <a href="https://portfolio-website-delta-sand-29.vercel.app/" target="_blank" rel="noopener noreferrer">
+                        View Portfolio
                       </a>
                     </div>
                   </div>

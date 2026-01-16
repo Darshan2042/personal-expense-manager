@@ -2,12 +2,12 @@
 
 ## 🌐 GitHub Repo  
 ```bash
-https://github.com/Prakashsaw/Expense-Management-System
+https://github.com/[your-username]/personal-expense-manager
 ```
 
 ## 🚀 Live Demo  
 ```bash
-https://expense-management-system-prakash.netlify.app/
+[Coming Soon - Your Deployment URL]
 ```
 
 ## 📌 Description  
@@ -44,7 +44,7 @@ It provides features like user authentication, expense tracking, and data visual
 
 ### **Step 1: Clone the project**  
 ```bash
-git clone https://github.com/Prakashsaw/Expense-Management-System.git
+git clone https://github.com/[your-username]/personal-expense-manager.git
 ```
 
 ### **Step 2: Navigate to the project directory**  
@@ -160,7 +160,9 @@ Once the setup is complete, the app will be running on your local system.
 ---
 
 ## 🛠 Made By  
-- [@Prakashsaw](https://github.com/Prakashsaw)  
+- Darshan Pawar  
+- Portfolio: https://portfolio-website-delta-sand-29.vercel.app/  
+- Email: pawardarshan1204@gmail.com  
 
 ---
 

@@ -9,7 +9,7 @@
     "dev": "nodemon server.js"
   },
   "keywords": [],
-  "author": "Prakash",
+  "author": "Darshan Pawar",
   "license": "MIT",
   "dependencies": {
     "@getbrevo/brevo": "^3.0.1",

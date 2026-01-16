@@ -8,6 +8,9 @@ import {
   Table,
   DatePicker,
   Alert,
+  Spin,
+  Empty,
+  Statistic,
 } from "antd";
 import {
   UnorderedListOutlined,
@@ -15,6 +18,13 @@ import {
   EditOutlined,
   DeleteOutlined,
   ExportOutlined,
+  PlusOutlined,
+  SearchOutlined,
+  FilterOutlined,
+  DollarOutlined,
+  RiseOutlined,
+  FallOutlined,
+  WalletOutlined,
 } from "@ant-design/icons";
 import Layout from "./../components/Layout/Layout";
 import moment from "moment";
@@ -24,6 +34,7 @@ import { useAuth } from "../hooks/useAuth";
 import ErrorAlert from "../components/common/ErrorAlert";
 import * as XLSX from "xlsx";
 import { saveAs } from "file-saver";
+import "./TransactionsPage.css";
 
 const { RangePicker } = DatePicker;
 const { Search } = Input;
@@ -152,116 +163,113 @@ const HomePage = () => {
 
   // Table columns
   const columns = useMemo(() => [
-    // Serial number is added to the table
     {
       title: "S.No",
       dataIndex: "sno",
       key: "sno",
-      render: (text, record, index) => index + 1,
-    },
-    {
-      id: "1",
-      title: "Date(yyyy-mm-dd)",
-      dataIndex: "date",
-      render: (text) => <span>{moment(text).format("YYYY-MM-DD")}</span>,
-    },
-    {
-      id: "2",
-      title: "Amount (₹)",
-      dataIndex: "amount",
-      render: (amount) => (
-        <span style={{ fontWeight: '600', color: 'var(--text-primary)' }}>
-          ₹{parseFloat(amount).toLocaleString()}
+      render: (text, record, index) => (
+        <span style={{ fontWeight: 600, color: '#6b7280' }}>
+          {index + 1}
         </span>
       ),
+      width: 70,
     },
     {
-      id: "3",
+      title: "Date",
+      dataIndex: "date",
+      key: "date",
+      render: (text) => (
+        <span className="date-cell">
+          {moment(text).format("MMM DD, YYYY")}
+        </span>
+      ),
+      sorter: (a, b) => moment(a.date).unix() - moment(b.date).unix(),
+    },
+    {
+      title: "Amount",
+      dataIndex: "amount",
+      key: "amount",
+      render: (amount, record) => (
+        <div className={`amount-cell ${record.type.toLowerCase()}`}>
+          {record.type === "Income" ? "+" : "-"}
+          ₹{parseFloat(amount).toLocaleString("en-IN")}
+        </div>
+      ),
+      sorter: (a, b) => parseFloat(a.amount) - parseFloat(b.amount),
+    },
+    {
       title: "Type",
       dataIndex: "type",
+      key: "type",
       render: (type) => (
-        <span
-          style={{
-            padding: '0.25rem 0.75rem',
-            borderRadius: 'var(--radius-full)',
-            fontSize: '0.875rem',
-            fontWeight: '600',
-            background: type === 'Income' 
-              ? 'linear-gradient(135deg, #10b981 0%, #059669 100%)' 
-              : 'linear-gradient(135deg, #ef4444 0%, #dc2626 100%)',
-            color: 'white',
-            display: 'inline-block',
-          }}
-        >
+        <span className={`transaction-type-badge ${type.toLowerCase()}`}>
+          {type === 'Income' ? <RiseOutlined /> : <FallOutlined />}
           {type}
         </span>
       ),
+      filters: [
+        { text: 'Income', value: 'Income' },
+        { text: 'Expense', value: 'Expense' },
+      ],
+      onFilter: (value, record) => record.type === value,
     },
     {
-      id: "4",
       title: "Category",
       dataIndex: "category",
+      key: "category",
       render: (category) => (
-        <span style={{ color: 'var(--text-secondary)', fontWeight: '500' }}>
+        <span className="category-badge">
           {category}
         </span>
       ),
     },
     {
-      id: "5",
-      title: "Refrence",
+      title: "Reference",
       dataIndex: "refrence",
+      key: "refrence",
+      render: (text) => (
+        <span style={{ color: '#374151', fontWeight: 500 }}>
+          {text}
+        </span>
+      ),
     },
     {
-      id: "6",
+      title: "Description",
+      dataIndex: "description",
+      key: "description",
+      render: (text) => (
+        <span style={{ color: '#6b7280', fontSize: '0.9rem' }}>
+          {text || '-'}
+        </span>
+      ),
+      ellipsis: true,
+    },
+    {
       title: "Actions",
+      key: "actions",
+      fixed: 'right',
+      width: 120,
       render: (text, record) => (
-        <div style={{ display: 'flex', gap: '0.75rem', alignItems: 'center' }}>
-          <EditOutlined
-            style={{ 
-              color: "var(--secondary-color)",
-              fontSize: '18px',
-              cursor: 'pointer',
-              padding: '0.5rem',
-              borderRadius: 'var(--radius-md)',
-              transition: 'all var(--transition-base)'
-            }}
-            className="action-icon"
+        <div className="actions-cell">
+          <div
+            className="action-icon edit"
             onClick={() => {
               setEditable(record);
               setShowModal(true);
             }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.background = 'rgba(16, 185, 129, 0.1)';
-              e.currentTarget.style.transform = 'scale(1.1)';
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.background = 'transparent';
-              e.currentTarget.style.transform = 'scale(1)';
-            }}
-          />
-          <DeleteOutlined
-            style={{ 
-              color: "var(--danger-color)",
-              fontSize: '18px',
-              cursor: 'pointer',
-              padding: '0.5rem',
-              borderRadius: 'var(--radius-md)',
-              transition: 'all var(--transition-base)'
-            }}
-            className="action-icon"
+            title="Edit"
+          >
+            <EditOutlined />
+          </div>
+          <div
+            className="action-icon delete"
             onClick={() => {
               handleDelete(record);
             }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.background = 'rgba(239, 68, 68, 0.1)';
-              e.currentTarget.style.transform = 'scale(1.1)';
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.background = 'transparent';
-              e.currentTarget.style.transform = 'scale(1)';
-            }}
-          />
+            title="Delete"
+          >
+            <DeleteOutlined />
+          </div>
         </div>
       ),
     },
@@ -380,128 +388,237 @@ const HomePage = () => {
   return (
     <>
       <Layout>
-        <div className="transaction-page">
+        <div className="transactions-page">
+          {/* Header Section */}
+          <div className="transactions-header">
+            <div className="header-content">
+              <h1 className="transactions-title">Transactions Manager</h1>
+              <p className="transactions-subtitle">
+                Track and manage all your financial transactions
+              </p>
+            </div>
+          </div>
+
+          {/* Quick Stats */}
+          <div className="quick-stats">
+            <div className="stat-card-mini total">
+              <div className="stat-label">
+                <UnorderedListOutlined />
+                Total Transactions
+              </div>
+              <div className="stat-value">{filteredTransactions.length}</div>
+              <div className="stat-change">
+                {allTransection.length} total records
+              </div>
+            </div>
+            <div className="stat-card-mini income">
+              <div className="stat-label">
+                <RiseOutlined />
+                Total Income
+              </div>
+              <div className="stat-value">
+                ₹
+                {filteredTransactions
+                  .filter((t) => t.type === "Income")
+                  .reduce((acc, t) => acc + parseFloat(t.amount), 0)
+                  .toLocaleString()}
+              </div>
+              <div className="stat-change positive">
+                {filteredTransactions.filter((t) => t.type === "Income").length}{" "}
+                transactions
+              </div>
+            </div>
+            <div className="stat-card-mini expense">
+              <div className="stat-label">
+                <FallOutlined />
+                Total Expense
+              </div>
+              <div className="stat-value">
+                ₹
+                {filteredTransactions
+                  .filter((t) => t.type === "Expense")
+                  .reduce((acc, t) => acc + parseFloat(t.amount), 0)
+                  .toLocaleString()}
+              </div>
+              <div className="stat-change negative">
+                {filteredTransactions.filter((t) => t.type === "Expense").length}{" "}
+                transactions
+              </div>
+            </div>
+            <div className="stat-card-mini balance">
+              <div className="stat-label">
+                <WalletOutlined />
+                Net Balance
+              </div>
+              <div className="stat-value">
+                ₹
+                {(
+                  filteredTransactions
+                    .filter((t) => t.type === "Income")
+                    .reduce((acc, t) => acc + parseFloat(t.amount), 0) -
+                  filteredTransactions
+                    .filter((t) => t.type === "Expense")
+                    .reduce((acc, t) => acc + parseFloat(t.amount), 0)
+                ).toLocaleString()}
+              </div>
+            </div>
+          </div>
+
           <ErrorAlert error={transactionError} onClose={() => setTransactionError(null)} />
-          <div className="filters">
-            <div>
-              <h6>Select Frequency</h6>
-              <Select
-                value={frequency}
-                onChange={setFrequency}
-                style={{ minWidth: 150 }}
-              >
-                {FREQUENCY_OPTIONS.map((option) => (
-                  <Select.Option key={option.value} value={option.value}>
-                    {option.label}
-                  </Select.Option>
-                ))}
-              </Select>
-              {frequency === "custom" && (
-                <RangePicker
-                  value={selectedDate}
-                  onChange={(values) => setSelectedate(values)}
+
+          {/* Filters Section */}
+          <div className="filters-container">
+            <div className="filters-row">
+              <div className="filter-group">
+                <label className="filter-label">
+                  <FilterOutlined /> Frequency
+                </label>
+                <Select
+                  value={frequency}
+                  onChange={setFrequency}
+                >
+                  {FREQUENCY_OPTIONS.map((option) => (
+                    <Select.Option key={option.value} value={option.value}>
+                      {option.label}
+                    </Select.Option>
+                  ))}
+                </Select>
+                {frequency === "custom" && (
+                  <RangePicker
+                    value={selectedDate}
+                    onChange={(values) => setSelectedate(values)}
+                    style={{ marginTop: '0.5rem' }}
+                  />
+                )}
+              </div>
+
+              <div className="filter-group">
+                <label className="filter-label">
+                  <FilterOutlined /> Type
+                </label>
+                <Select
+                  value={type}
+                  onChange={setType}
+                >
+                  {TYPE_OPTIONS.map((option) => (
+                    <Select.Option key={option.value} value={option.value}>
+                      {option.label}
+                    </Select.Option>
+                  ))}
+                </Select>
+              </div>
+
+              <div className="filter-group">
+                <label className="filter-label">
+                  <SearchOutlined /> Search
+                </label>
+                <Input.Search
+                  placeholder="Search transactions..."
+                  allowClear
+                  value={searchValue}
+                  onChange={(e) => onSearch(e.target.value)}
+                  onSearch={onSearch}
                 />
-              )}
+              </div>
+
+              <div className="filter-group">
+                <label className="filter-label">View</label>
+                <div className="view-toggle">
+                  <button
+                    className={`view-btn ${viewData === VIEW_TYPES.TABLE ? 'active' : ''}`}
+                    onClick={() => setViewData(VIEW_TYPES.TABLE)}
+                    title="Table View"
+                  >
+                    <UnorderedListOutlined />
+                  </button>
+                  <button
+                    className={`view-btn ${viewData === VIEW_TYPES.ANALYTICS ? 'active' : ''}`}
+                    onClick={() => setViewData(VIEW_TYPES.ANALYTICS)}
+                    title="Analytics View"
+                  >
+                    <AreaChartOutlined />
+                  </button>
+                </div>
+              </div>
             </div>
-            <div className="filter-tab">
-              <h6>Select Type</h6>
-              <Select
-                value={type}
-                onChange={setType}
-                style={{ minWidth: 150 }}
-              >
-                {TYPE_OPTIONS.map((option) => (
-                  <Select.Option key={option.value} value={option.value}>
-                    {option.label}
-                  </Select.Option>
-                ))}
-              </Select>
-            </div>
-            <div className="switch-icons">
-              <UnorderedListOutlined
-                className={`mx-2 ${
-                  viewData === VIEW_TYPES.TABLE ? "active-icon" : "inactive-icon"
-                }`}
-                onClick={() => setViewData(VIEW_TYPES.TABLE)}
-              />
-              <AreaChartOutlined
-                className={`mx-2 ${
-                  viewData === VIEW_TYPES.ANALYTICS ? "active-icon" : "inactive-icon"
-                }`}
-                onClick={() => setViewData(VIEW_TYPES.ANALYTICS)}
-              />
-            </div>
-            <div className="search-bar">
-              <Search
-                placeholder="Search transactions"
-                allowClear
-                value={searchValue}
-                onChange={(e) => onSearch(e.target.value)}
-                onSearch={onSearch}
-                style={{
-                  width: '100%',
-                  minWidth: 150,
-                }}
-              />
-            </div>
-            <div>
+
+            <div className="actions-row">
               <button
-                className="btn btn-primary"
+                className="action-btn primary"
                 onClick={() => {
                   setEditable(null);
                   form.resetFields();
                   setShowModal(true);
                 }}
               >
-                Add New
+                <PlusOutlined /> Add New Transaction
               </button>
-            </div>
-            <div>
               <button
-                className="btn btn-secondary trasctn-exprt-btn"
+                className="action-btn secondary"
                 onClick={exportToExcel}
               >
-                Export to Excel <ExportOutlined />
+                <ExportOutlined /> Export to Excel
               </button>
             </div>
           </div>
-          <div className="content">
-            {viewData === VIEW_TYPES.TABLE ? (
-              <Table 
-                columns={columns} 
-                dataSource={filteredTransactions}
-                loading={loading}
-                pagination={{
-                  pageSize: 10,
-                  showSizeChanger: true,
-                  showTotal: (total) => `Total ${total} transactions`,
-                }}
-                rowKey="transactionId"
-                style={{
-                  background: 'var(--bg-primary)',
-                }}
-                className="modern-table"
-              />
+
+          {/* Content Section */}
+          <div className="table-container">
+            {loading ? (
+              <div style={{ textAlign: 'center', padding: '3rem' }}>
+                <Spin size="large" tip="Loading transactions..." />
+              </div>
+            ) : viewData === VIEW_TYPES.TABLE ? (
+              filteredTransactions.length === 0 ? (
+                <div className="empty-state-container">
+                  <div className="empty-state-icon">📊</div>
+                  <h3 className="empty-state-title">No Transactions Found</h3>
+                  <p className="empty-state-text">
+                    {searchValue
+                      ? "No transactions match your search criteria"
+                      : "Start by adding your first transaction"}
+                  </p>
+                  {!searchValue && (
+                    <button
+                      className="action-btn primary"
+                      onClick={() => {
+                        setEditable(null);
+                        form.resetFields();
+                        setShowModal(true);
+                      }}
+                    >
+                      <PlusOutlined /> Add Your First Transaction
+                    </button>
+                  )}
+                </div>
+              ) : (
+                <Table 
+                  columns={columns} 
+                  dataSource={filteredTransactions}
+                  loading={loading}
+                  pagination={{
+                    pageSize: 10,
+                    showSizeChanger: true,
+                    showTotal: (total) => (
+                      <span style={{ fontWeight: 600, color: '#374151' }}>
+                        Total {total} transactions
+                      </span>
+                    ),
+                    pageSizeOptions: ['5', '10', '20', '50'],
+                  }}
+                  rowKey="transactionId"
+                  className="modern-table"
+                  scroll={{ x: true }}
+                />
+              )
             ) : (
               <Analytics allTransection={filteredTransactions} />
             )}
           </div>
+
+          {/* Modal */}
           <Modal
-            title={
-              <span
-                style={{
-                  fontSize: "1.5rem",
-                  fontWeight: "700",
-                  background:
-                    "linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%)",
-                  WebkitBackgroundClip: "text",
-                  WebkitTextFillColor: "transparent",
-                  backgroundClip: "text",
-                }}
-              >
-                {editable ? "Edit Transaction" : "Add Transaction"}
-              </span>
-            }
+            title={editable ? "Edit Transaction" : "Add New Transaction"}
             open={showModal}
             onCancel={() => {
               setShowModal(false);
@@ -509,11 +626,9 @@ const HomePage = () => {
               form.resetFields();
             }}
             destroyOnClose={true}
-            footer={false}
+            footer={null}
             width={600}
-            style={{
-              borderRadius: "var(--radius-xl)",
-            }}
+            className="transaction-modal"
           >
             <Form
               form={form}
@@ -521,47 +636,32 @@ const HomePage = () => {
               onFinish={handleSubmit}
             >
               <Form.Item 
-                label={<span style={{ fontWeight: '600', color: 'var(--text-primary)' }}>Amount</span>} 
+                label="Amount" 
                 name="amount"
                 rules={[{ required: true, message: 'Please enter amount!' }]}
               >
                 <Input 
                   type="number" 
                   placeholder="Enter amount"
-                  style={{ borderRadius: 'var(--radius-md)', height: '40px' }}
+                  prefix="₹"
                 />
               </Form.Item>
               <Form.Item 
-                label={<span style={{ fontWeight: '600', color: 'var(--text-primary)' }}>Type</span>} 
+                label="Type" 
                 name="type"
                 rules={[{ required: true, message: 'Please select type!' }]}
               >
-                <Select 
-                  placeholder="Select type"
-                  style={{ borderRadius: 'var(--radius-md)' }}
-                >
+                <Select placeholder="Select type">
                   <Select.Option value="Income">Income</Select.Option>
                   <Select.Option value="Expense">Expense</Select.Option>
                 </Select>
               </Form.Item>
               <Form.Item
-                label={
-                  <span
-                    style={{
-                      fontWeight: "600",
-                      color: "var(--text-primary)",
-                    }}
-                  >
-                    Category
-                  </span>
-                }
+                label="Category"
                 name="category"
                 rules={[{ required: true, message: "Please select category!" }]}
               >
-                <Select
-                  placeholder="Select category"
-                  style={{ borderRadius: "var(--radius-md)" }}
-                >
+                <Select placeholder="Select category">
                   {TRANSACTION_CATEGORIES.map((category) => (
                     <Select.Option key={category} value={category}>
                       {category}
@@ -570,56 +670,47 @@ const HomePage = () => {
                 </Select>
               </Form.Item>
               <Form.Item 
-                label={<span style={{ fontWeight: '600', color: 'var(--text-primary)' }}>Date</span>} 
+                label="Date" 
                 name="date"
                 rules={[{ required: true, message: 'Please select date!' }]}
               >
-                <Input 
-                  type="date" 
-                  style={{ borderRadius: 'var(--radius-md)', height: '40px' }}
-                />
+                <Input type="date" />
               </Form.Item>
               <Form.Item 
-                label={<span style={{ fontWeight: '600', color: 'var(--text-primary)' }}>Reference</span>} 
+                label="Reference" 
                 name="refrence"
                 rules={[{ required: true, message: 'Please enter reference!' }]}
               >
-                <Input 
-                  type="text" 
-                  placeholder="Enter reference"
-                  style={{ borderRadius: 'var(--radius-md)', height: '40px' }}
-                />
+                <Input type="text" placeholder="Enter reference" />
               </Form.Item>
               <Form.Item 
-                label={<span style={{ fontWeight: '600', color: 'var(--text-primary)' }}>Description</span>} 
+                label="Description" 
                 name="description"
                 rules={[{ required: true, message: 'Please enter description!' }]}
               >
                 <Input.TextArea 
                   rows={3}
                   placeholder="Enter description"
-                  style={{ borderRadius: 'var(--radius-md)' }}
                 />
               </Form.Item>
-              <div className="d-flex justify-content-end" style={{ gap: '0.5rem', marginTop: '1.5rem' }}>
+              <div className="modal-footer">
                 <button
                   type="button"
-                  className="btn btn-secondary"
+                  className="modal-btn cancel"
                   onClick={() => {
                     setShowModal(false);
                     setEditable(null);
+                    form.resetFields();
                   }}
-                  style={{ minWidth: '100px' }}
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
-                  className="btn btn-primary"
+                  className="modal-btn submit"
                   disabled={loading}
-                  style={{ minWidth: '100px' }}
                 >
-                  {loading ? 'Saving...' : 'SAVE'}
+                  {loading ? 'Saving...' : (editable ? 'Update' : 'Save')}
                 </button>
               </div>
             </Form>

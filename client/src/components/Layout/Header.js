@@ -5,6 +5,8 @@ import {
   DownOutlined,
   EditOutlined,
   PoweroffOutlined,
+  DashboardOutlined,
+  UnorderedListOutlined,
 } from "@ant-design/icons";
 import { Dropdown, message, Button } from "antd";
 import "../../styles/HeaderStyles.css";
@@ -85,7 +87,20 @@ const Header = () => {
               <li className="nav-item">
                 <h6 className="nav-link">
                   <Button className="nav-item home-btn">
-                    <Link to="/user" style={{ color: 'inherit', textDecoration: 'none' }}>Home</Link>
+                    <Link to="/user" style={{ color: 'inherit', textDecoration: 'none' }}>
+                      <DashboardOutlined style={{ marginRight: '0.5rem' }} />
+                      Dashboard
+                    </Link>
+                  </Button>
+                </h6>
+              </li>
+              <li className="nav-item">
+                <h6 className="nav-link">
+                  <Button className="nav-item home-btn">
+                    <Link to="/user/transactions" style={{ color: 'inherit', textDecoration: 'none' }}>
+                      <UnorderedListOutlined style={{ marginRight: '0.5rem' }} />
+                      Transactions
+                    </Link>
                   </Button>
                 </h6>
               </li>

@@ -1,6 +1,7 @@
 import { Routes, Route, Navigate } from "react-router-dom";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import HomePage from "./pages/HomePage";
+import UserDashboard from "./pages/UserDashboard";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import PageNotFound from "./pages/PageNotFound";
@@ -27,6 +28,14 @@ function App() {
       <Routes>
         <Route
           path="/user"
+          element={
+            <ProtectedRoutes>
+              <UserDashboard />
+            </ProtectedRoutes>
+          }
+        />
+        <Route
+          path="/user/transactions"
           element={
             <ProtectedRoutes>
               <HomePage />

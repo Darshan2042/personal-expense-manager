@@ -6,8 +6,6 @@ const {
   loggedUser,
   changePassword,
   verifyEmail,
-  sendEmailForOTPVerification,
-  verifyEmailThroughOTP,
   sendOTPForMobileVerification,
   verifyMobileNumberThroughOTP,
   updateUserProfile,
@@ -33,11 +31,6 @@ router.post(
   "/reset-password/:expenseAppUserId/:token",
   resetUserPasswordThroughForgotPassword
 );
-
-// OTP Verification through email
-router.post("/send-email-otp", sendEmailForOTPVerification);
-// verify OTP
-router.post("/verify-email-otp/:expenseAppUserId", verifyEmailThroughOTP);
 
 // OTP Verification through mobile number
 router.post("/send-phone-otp", sendOTPForMobileVerification);

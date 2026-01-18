@@ -2,7 +2,6 @@ import React, { useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button, Result } from "antd";
 import { HomeOutlined } from "@ant-design/icons";
-import Footer from "../components/Layout/Footer";
 import Header1 from "../components/Layout/Header1";
 import "./PageNotFound.css";
 
@@ -54,7 +53,6 @@ const PageNotFound = () => {
           ]}
         />
       </div>
-      <Footer />
     </>
   );
 };

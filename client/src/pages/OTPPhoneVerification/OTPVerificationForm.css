@@ -31,7 +31,7 @@
   }
 }
 
-.admin-login-content {
+.otp-content {
   min-height: 100vh;
   width: 100%;
   max-width: 100vw;
@@ -49,7 +49,7 @@
   box-sizing: border-box;
 }
 
-.admin-login-page {
+.otp-verification-page {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -60,7 +60,7 @@
   z-index: 2;
 }
 
-.admin-login-form {
+.otp-verification-form {
   background: rgba(255, 255, 255, 0.95);
   backdrop-filter: blur(20px);
   padding: var(--spacing-2xl);
@@ -72,7 +72,7 @@
   transition: all var(--transition-base);
 }
 
-.admin-login-form:hover {
+.otp-verification-form:hover {
   box-shadow: 0 25px 70px rgba(0, 0, 0, 0.35);
   transform: translateY(-5px);
 }
@@ -88,7 +88,7 @@
   }
 }
 
-.admin-login-header {
+.header-name {
   background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -99,7 +99,7 @@
   margin-bottom: var(--spacing-md);
 }
 
-.admin-login-description {
+.otp-description {
   color: var(--text-secondary);
   font-size: 0.95rem;
   text-align: center;
@@ -107,132 +107,65 @@
   line-height: 1.6;
 }
 
-.admin-login-alert {
-  margin-bottom: var(--spacing-lg);
-  border-radius: var(--radius-md);
-}
-
-.admin-login-form-fields {
-  width: 100%;
-}
-
-.admin-login-form-fields .ant-form-item-label > label {
-  color: var(--text-primary);
-  font-weight: 500;
-  font-size: 0.95rem;
-}
-
-.admin-login-input {
+.otp-input {
   border-radius: var(--radius-md);
   border: 1px solid rgba(0, 0, 0, 0.1);
   transition: all var(--transition-base);
   background: rgba(255, 255, 255, 0.9);
 }
 
-.admin-login-input:hover {
+.otp-input:hover {
   border-color: var(--primary-color);
   box-shadow: 0 0 0 2px rgba(102, 126, 234, 0.1);
 }
 
-.admin-login-input:focus,
-.admin-login-input.ant-input-affix-wrapper-focused {
+.otp-input:focus,
+.otp-input.ant-input-affix-wrapper-focused {
   border-color: var(--primary-color);
   box-shadow: 0 0 0 2px rgba(102, 126, 234, 0.2);
 }
 
-.admin-login-input .ant-input-prefix {
+.otp-input .ant-input-prefix {
   color: var(--primary-color);
   margin-right: var(--spacing-sm);
 }
 
-.admin-login-submit-btn {
-  background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
-  border: none;
-  border-radius: var(--radius-md);
-  height: 48px;
-  font-size: 1rem;
-  font-weight: 600;
-  margin-top: var(--spacing-md);
-  transition: all var(--transition-base);
-  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
-}
-
-.admin-login-submit-btn:hover {
-  background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary-color) 100%);
-  transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(102, 126, 234, 0.5);
-}
-
-.admin-login-submit-btn:active {
-  transform: translateY(0);
-}
-
-.admin-login-footer-links {
-  text-align: center;
-  margin-top: var(--spacing-lg);
-  padding-top: var(--spacing-lg);
-  border-top: 1px solid rgba(0, 0, 0, 0.1);
-}
-
-.admin-login-footer-links p {
-  color: var(--text-secondary);
-  font-size: 0.9rem;
-  margin: 0;
-}
-
-.admin-login-link {
-  color: var(--primary-color);
-  text-decoration: none;
-  font-weight: 600;
-  transition: all var(--transition-base);
-}
-
-.admin-login-link:hover {
-  color: var(--primary-dark);
-  text-decoration: underline;
-}
-
 /* Responsive Design */
 @media screen and (max-width: 768px) {
-  .admin-login-content {
+  .otp-content {
     padding: var(--spacing-md);
     padding-top: calc(var(--spacing-md) + 60px);
   }
 
-  .admin-login-form {
+  .otp-verification-form {
     padding: var(--spacing-xl);
   }
 
-  .admin-login-header {
+  .header-name {
     font-size: 1.75rem;
   }
 
-  .admin-login-description {
+  .otp-description {
     font-size: 0.9rem;
   }
 }
 
 @media screen and (max-width: 480px) {
-  .admin-login-content {
+  .otp-content {
     padding: var(--spacing-sm);
     padding-top: calc(var(--spacing-sm) + 60px);
   }
 
-  .admin-login-form {
+  .otp-verification-form {
     padding: var(--spacing-lg);
     border-radius: var(--radius-lg);
   }
 
-  .admin-login-header {
+  .header-name {
     font-size: 1.5rem;
   }
 
-  .admin-login-description {
+  .otp-description {
     font-size: 0.85rem;
-  }
-
-  .admin-login-submit-btn {
-    height: 44px;
-    font-size: 0.95rem;
   }
 }

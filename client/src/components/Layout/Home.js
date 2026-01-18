@@ -41,13 +41,6 @@ const Home = () => {
     { number: "24/7", label: "Support" }
   ];
 
-  //prevent for login user
-  useEffect(() => {
-    if (localStorage.getItem("user")) {
-      navigate("/user");
-    }
-  }, [navigate]);
-
   useEffect(() => {
     setIsVisible(true);
     

@@ -9,8 +9,6 @@ const emailVerificationEmail = require("../utils/emailTemplates/emailVerificatio
 const resetPasswordEmail = require("../utils/emailTemplates/resetPasswordEmail");
 const resetPasswordSuccess = require("../utils/emailTemplates/resetPasswordSuccess");
 const changedPasswordSuccess = require("../utils/emailTemplates/changedPasswordSuccess");
-const UserOTPModel = require("../models/userOTPModel");
-const OTPVerificationEmail = require("../utils/emailTemplates/OTPVerificationEmail");
 const axios = require("axios");
 const UserPhoneNumberModel = require("../models/userPhoneNumberModel");
 
@@ -213,138 +211,6 @@ const verifyEmail = async (req, res) => {
     res.status(400).json({
       status: "failed",
       message: "Something went wrong in email verification...!",
-    });
-  }
-};
-
-// Send Email vefication for OTP verification: Login not required
-const sendEmailForOTPVerification = async (req, res) => {
-  const { email } = req.body;
-  try {
-    if (!email) {
-      return res
-        .status(400)
-        .json({ status: "failed", message: "Email field required...!" });
-    }
-
-    const user = await userModel.findOne({ email: email });
-    if (!user) {
-      return res
-        .status(400)
-        .json({ status: "failed", message: "User doesn't exist...!" });
-    }
-
-    // Generate OTP: 6 digit random number
-    const OTP = Math.floor(100000 + Math.random() * 900000);
-
-    // Now send the OTP to user's email
-    try {
-      info = await sendMailThroughBrevo({
-        to: user.email,
-        subject: "OTP for Email Verification",
-        html: OTPVerificationEmail(user, OTP, process.env.EMAIL_FROM) // Your HTML generator
-      });
-    } catch (error) {
-      console.error("OTP verification mail failed to send...! Error:", error);
-      return res.status(400).json({
-        status: "failed",
-        message: "OTP verification mail failed to send...!",
-      });
-    }
-
-    const userOTP = await UserOTPModel.findOne({
-      expenseAppUserId: user.expenseAppUserId,
-    });
-    // If user is already created then update the OTP in database
-    if (userOTP) {
-      const updatedOTP = await UserOTPModel.findOneAndUpdate(
-        { expenseAppUserId: userOTP.expenseAppUserId },
-        {
-          $set: { otp: String(OTP) },
-        }
-      );
-    } else {
-      // Now create model in UserOTPModel for verification of email and save it
-      const newUserOTP = new UserOTPModel({
-        expenseAppUserId: user.expenseAppUserId,
-        otp: String(OTP),
-      });
-      await newUserOTP.save();
-    }
-
-    return res.status(200).json({
-      status: "success",
-      message: "OTP sent successfully. Please Check Your Email...!",
-      email: user.email,
-      expenseAppUserId: user.expenseAppUserId,
-    });
-  } catch (error) {
-    console.log(error);
-    res.status(400).json({
-      status: "failed",
-      message: "Something went wrong in sending OTP for email verification...!",
-    });
-  }
-};
-
-//Verify Email through OTP: Login not required
-const verifyEmailThroughOTP = async (req, res) => {
-  const { expenseAppUserId } = req.params;
-  const { otp } = req.body;
-  try {
-    const user = await userModel.findOne({
-      expenseAppUserId: expenseAppUserId,
-    });
-    if (!user) {
-      return res.status(400).json({
-        status: "failed",
-        message: "Invalid or Expired OTP...!",
-      });
-    }
-
-    const userOTP = await UserOTPModel.findOne({
-      expenseAppUserId: expenseAppUserId,
-    });
-    if (!userOTP) {
-      return res.status(400).json({
-        status: "failed",
-        message: "Invalid or Expired OTP...!",
-      });
-    }
-
-    const OTP = String(otp);
-    // console.log("OTP: ", OTP);
-    // console.log("userOTP: ", userOTP.otp);
-    if (userOTP.otp !== OTP) {
-      return res.status(400).json({
-        status: "failed",
-        message: "Invalid or Expired OTP, Problem in otp...!",
-      });
-    }
-
-    const result = await userModel.findOneAndUpdate(
-      { expenseAppUserId: expenseAppUserId },
-      {
-        $set: { isVerified: true },
-      }
-    ); // Update the isVerified field in userModel
-
-    // Now delete the OTP from UserOTPModel
-    await UserOTPModel.findOneAndDelete({
-      expenseAppUserId: userOTP.expenseAppUserId,
-    });
-
-    return res.status(200).json({
-      status: "success",
-      message:
-        "Email verification through OTP has been verified successfully...!",
-      result,
-    });
-  } catch (error) {
-    console.log(error);
-    res.status(400).json({
-      status: "failed",
-      message: "Something went wrong in email verification through OTP...!",
     });
   }
 };
@@ -907,8 +773,6 @@ module.exports = {
   sendUserPasswordResetEmail,
   loggedUser,
   resetUserPasswordThroughForgotPassword,
-  sendEmailForOTPVerification,
-  verifyEmailThroughOTP,
   sendOTPForMobileVerification,
   verifyMobileNumberThroughOTP,
 };

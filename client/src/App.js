@@ -13,9 +13,7 @@ import PasswordResetSuccess from "./pages/ForgotPassword/PasswordResetSuccess";
 import SignUpSuccess from "./pages/EmailVerification/SignUpSuccess";
 import UserProfile from "./pages/UserDetails/UserProfile";
 import Home from "./components/Layout/Home";
-import SendOTPAndVerifyEmail from "./pages/OTPEmailVerification/SendOTPAndVerifyEmail";
 import SendOTPAndVerifyPhone from "./pages/OTPPhoneVerification/SendOTPAndVerifyPhone";
-import OTPVerifiedSuccess from "./pages/OTPEmailVerification/OTPVerifiedSuccess";
 import ChangePassword from "./pages/UserDetails/ChangePassword";
 import ContactUs from "./pages/UserDetails/ContactUs";
 import AboutUs from "./pages/UserDetails/AboutUs";
@@ -77,20 +75,21 @@ function App() {
           path="/password-reset-success"
           element={<PasswordResetSuccess />}
         />
-        {/* send otp and verify email */}
-        <Route
-          path="/email-otp-verification"
-          element={<SendOTPAndVerifyEmail />}
-        />
         {/* Send OTP and verify phone */}
         <Route
           path="/phone-otp-verification"
           element={<SendOTPAndVerifyPhone />}
         />
-        <Route path="/otp-verified-success" element={<OTPVerifiedSuccess />} />
         <Route path="/contact-us" element={<ContactUs />} />
         <Route path="/about-us" element={<AboutUs />} />
-        <Route path="/settings" element={<Settings />} />
+        <Route
+          path="/settings"
+          element={
+            <ProtectedRoutes>
+              <Settings />
+            </ProtectedRoutes>
+          }
+        />
         {/* if path is not correct then navigate to page not found page */}
         <Route path="*" element={<PageNotFound />} />
       </Routes>

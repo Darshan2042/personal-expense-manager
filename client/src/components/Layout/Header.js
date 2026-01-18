@@ -10,7 +10,7 @@ import {
 } from "@ant-design/icons";
 import { Dropdown, message, Button } from "antd";
 import "../../styles/HeaderStyles.css";
-import logo from "../../../src/Images/logo.png";
+import logo from "../../Images/logo-animated-alt.svg";
 const Header = () => {
   const [loginUser, setLoginUser] = useState("");
   const navigate = useNavigate();

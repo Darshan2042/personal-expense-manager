@@ -1,0 +1,177 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 60" width="200" height="60">
+  <defs>
+    <!-- Neon glow gradient -->
+    <linearGradient id="neonGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#22D3EE;stop-opacity:1">
+        <animate attributeName="stop-color" values="#22D3EE;#06B6D4;#22D3EE" dur="2s" repeatCount="indefinite"/>
+      </stop>
+      <stop offset="100%" style="stop-color:#A78BFA;stop-opacity:1">
+        <animate attributeName="stop-color" values="#A78BFA;#8B5CF6;#A78BFA" dur="2s" repeatCount="indefinite"/>
+      </stop>
+    </linearGradient>
+    
+    <!-- Text shine gradient -->
+    <linearGradient id="shineGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#FFFFFF;stop-opacity:1"/>
+      <stop offset="30%" style="stop-color:#06B6D4;stop-opacity:1"/>
+      <stop offset="70%" style="stop-color:#FFFFFF;stop-opacity:1"/>
+      <stop offset="100%" style="stop-color:#8B5CF6;stop-opacity:1"/>
+      <animate attributeName="x1" values="-100%;200%" dur="3s" repeatCount="indefinite"/>
+      <animate attributeName="x2" values="0%;300%" dur="3s" repeatCount="indefinite"/>
+    </linearGradient>
+    
+    <!-- Neon glow filter -->
+    <filter id="neonGlow">
+      <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    
+    <!-- Strong shadow -->
+    <filter id="strongShadow">
+      <feDropShadow dx="0" dy="3" stdDeviation="4" flood-color="#06B6D4" flood-opacity="0.6"/>
+    </filter>
+  </defs>
+  
+  <!-- Hexagon shape with pulse -->
+  <polygon points="30,8 45,17 45,35 30,44 15,35 15,17" 
+           fill="url(#neonGradient)" 
+           filter="url(#strongShadow)">
+    <animateTransform attributeName="transform" 
+                      type="scale" 
+                      values="1 1;1.1 1.1;1 1" 
+                      additive="sum"
+                      dur="2s" 
+                      repeatCount="indefinite"/>
+    <animateTransform attributeName="transform" 
+                      type="rotate" 
+                      from="0 30 26" 
+                      to="360 30 26" 
+                      additive="sum"
+                      dur="10s" 
+                      repeatCount="indefinite"/>
+  </polygon>
+  
+  <!-- Inner hexagon -->
+  <polygon points="30,14 39,20 39,32 30,38 21,32 21,20" 
+           fill="none" 
+           stroke="#0F172A" 
+           stroke-width="2">
+    <animateTransform attributeName="transform" 
+                      type="rotate" 
+                      from="0 30 26" 
+                      to="-360 30 26" 
+                      dur="8s" 
+                      repeatCount="indefinite"/>
+  </polygon>
+  
+  <!-- Animated dollar sign -->
+  <g transform="translate(30, 26)" filter="url(#neonGlow)">
+    <!-- Dollar vertical line -->
+    <line x1="0" y1="-10" x2="0" y2="10" 
+          stroke="#0F172A" 
+          stroke-width="2.5" 
+          stroke-linecap="round">
+      <animate attributeName="y1" values="-10;-12;-10" dur="1.5s" repeatCount="indefinite"/>
+      <animate attributeName="y2" values="10;12;10" dur="1.5s" repeatCount="indefinite"/>
+    </line>
+    
+    <!-- Dollar S -->
+    <path d="M -5,-7 Q -7,-8 -3,-9 Q 2,-10 5,-8 Q 7,-6 5,-4 Q 2,-2 -2,-2 Q -5,-2 -5,0 Q -5,2 -2,2 Q 2,2 5,4 Q 7,6 5,8 Q 2,10 -3,9 Q -7,8 -5,7" 
+          fill="none" 
+          stroke="#0F172A" 
+          stroke-width="2.5" 
+          stroke-linecap="round"/>
+  </g>
+  
+  <!-- Orbiting particles -->
+  <g>
+    <circle cx="30" cy="26" r="20" fill="none" stroke="none">
+      <animateTransform attributeName="transform" 
+                        type="rotate" 
+                        from="0 30 26" 
+                        to="360 30 26" 
+                        dur="4s" 
+                        repeatCount="indefinite"/>
+      <circle cx="30" cy="6" r="2.5" fill="#06B6D4" opacity="0.9">
+        <animate attributeName="r" values="2.5;3.5;2.5" dur="1s" repeatCount="indefinite"/>
+      </circle>
+    </circle>
+    
+    <circle cx="30" cy="26" r="20" fill="none" stroke="none">
+      <animateTransform attributeName="transform" 
+                        type="rotate" 
+                        from="120 30 26" 
+                        to="480 30 26" 
+                        dur="4s" 
+                        repeatCount="indefinite"/>
+      <circle cx="30" cy="6" r="2.5" fill="#8B5CF6" opacity="0.9">
+        <animate attributeName="r" values="2.5;3.5;2.5" dur="1s" begin="0.3s" repeatCount="indefinite"/>
+      </circle>
+    </circle>
+    
+    <circle cx="30" cy="26" r="20" fill="none" stroke="none">
+      <animateTransform attributeName="transform" 
+                        type="rotate" 
+                        from="240 30 26" 
+                        to="600 30 26" 
+                        dur="4s" 
+                        repeatCount="indefinite"/>
+      <circle cx="30" cy="6" r="2.5" fill="#10B981" opacity="0.9">
+        <animate attributeName="r" values="2.5;3.5;2.5" dur="1s" begin="0.6s" repeatCount="indefinite"/>
+      </circle>
+    </circle>
+  </g>
+  
+  <!-- Main text with shine effect -->
+  <text x="68" y="28" 
+        font-family="'Segoe UI', Arial, sans-serif" 
+        font-size="22" 
+        font-weight="900" 
+        fill="url(#shineGradient)" 
+        letter-spacing="0.5">
+    Expense
+  </text>
+  
+  <!-- Subtitle -->
+  <text x="68" y="48" 
+        font-family="'Segoe UI', Arial, sans-serif" 
+        font-size="13" 
+        font-weight="700" 
+        fill="#64748B" 
+        letter-spacing="2">
+    MANAGER
+    <animate attributeName="opacity" values="0.6;1;0.6" dur="2.5s" repeatCount="indefinite"/>
+  </text>
+  
+  <!-- Animated dots -->
+  <g opacity="0.8">
+    <circle cx="158" cy="25" r="2" fill="#06B6D4">
+      <animate attributeName="cy" values="25;22;25" dur="1.5s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="0.4;1;0.4" dur="1.5s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="168" cy="25" r="2" fill="#8B5CF6">
+      <animate attributeName="cy" values="25;22;25" dur="1.5s" begin="0.3s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="0.4;1;0.4" dur="1.5s" begin="0.3s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="178" cy="25" r="2" fill="#10B981">
+      <animate attributeName="cy" values="25;22;25" dur="1.5s" begin="0.6s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="0.4;1;0.4" dur="1.5s" begin="0.6s" repeatCount="indefinite"/>
+    </circle>
+  </g>
+  
+  <!-- Energy waves -->
+  <g opacity="0.3">
+    <circle cx="30" cy="26" r="18" fill="none" stroke="#06B6D4" stroke-width="1">
+      <animate attributeName="r" values="18;25;18" dur="2s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="0.6;0;0.6" dur="2s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="30" cy="26" r="18" fill="none" stroke="#8B5CF6" stroke-width="1">
+      <animate attributeName="r" values="18;25;18" dur="2s" begin="1s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="0.6;0;0.6" dur="2s" begin="1s" repeatCount="indefinite"/>
+    </circle>
+  </g>
+</svg>

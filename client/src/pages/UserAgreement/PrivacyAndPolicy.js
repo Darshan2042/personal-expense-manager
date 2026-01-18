@@ -244,7 +244,6 @@ const PrivacyAndPolicy = () => {
           </div>
         </div>
       </div>
-      <Footer />
     </>
   );
 };

@@ -169,7 +169,6 @@ const ChangePassword = () => {
           </div>
         </div>
       </div>
-      <Footer />
     </>
   );
 };

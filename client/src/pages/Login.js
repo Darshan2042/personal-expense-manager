@@ -6,7 +6,6 @@ import "../styles/Loginpage.css";
 import { getResponseError } from "../utils/getResponseError";
 import { BASE_URL } from "../utils/baseURL";
 import { LoadingOutlined, LockOutlined, MailOutlined } from "@ant-design/icons";
-import Footer from "../components/Layout/Footer";
 import Header1 from "../components/Layout/Header1";
 
 const Login = () => {
@@ -140,7 +139,6 @@ const Login = () => {
           </div>
         </div>
       </div>
-      <Footer />
     </div>
   );
 };

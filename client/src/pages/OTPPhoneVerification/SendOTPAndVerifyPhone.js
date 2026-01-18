@@ -1,33 +1,12 @@
-import { LoadingOutlined, PhoneFilled } from "@ant-design/icons";
+import { LoadingOutlined, PhoneFilled, LockOutlined } from "@ant-design/icons";
 import { Alert, Form, Input, message } from "antd";
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import "../OTPEmailVerification/OTPVerificationForm.css";
+import "./OTPVerificationForm.css";
 import { BASE_URL } from "../../utils/baseURL";
 import axios from "axios";
 import { getResponseError } from "../../utils/getResponseError";
-import OTPInput from "../../components/OTPInput";
 import Header1 from "../../components/Layout/Header1";
-import Footer from "../../components/Layout/Footer";
-
-// OTP Input Wrapper to integrate with Ant Design Form
-const OTPInputWrapper = ({ value, onChange }) => {
-  const otpArray = typeof value === 'string' ? value.split('') : (value || []);
-  
-  const handleChange = (newOtp) => {
-    const otpString = typeof newOtp === 'string' ? newOtp : newOtp.join('');
-    if (onChange) {
-      onChange(otpString);
-    }
-  };
-  
-  return (
-    <OTPInput
-      otp={otpArray}
-      onChange={handleChange}
-    />
-  );
-};
 
 const SendOTPAndVerifyPhone = () => {
   const [loading, setLoading] = useState(false);
@@ -65,7 +44,7 @@ const SendOTPAndVerifyPhone = () => {
       setSendingOTPError(null);
       message.success("OTP verified successfully...!");
       setResponse(false);
-      navigate("/otp-verified-success");
+      navigate("/login");
     } catch (error) {
       setLoading(false);
       setResponse([]);
@@ -121,27 +100,6 @@ const SendOTPAndVerifyPhone = () => {
                   />
                 </Form.Item>
 
-                {/* <Form.Item
-                  label="OTP"
-                  name="otp"
-                  rules={[
-                    {
-                      required: true,
-                      message: "Please enter your OTP...!",
-                    },
-                  ]}
-                >
-                  <Input
-                    prefix={<LockOutlined />}
-                    className="pass-input"
-                    type="number"
-                    placeholder="OTP"
-                    style={{
-                      height: 40,
-                    }}
-                  />
-                </Form.Item> */}
-
                 <Form.Item
                   label="OTP"
                   name="otp"
@@ -156,7 +114,14 @@ const SendOTPAndVerifyPhone = () => {
                     },
                   ]}
                 >
-                  <OTPInputWrapper />
+                  <Input
+                    prefix={<LockOutlined />}
+                    className="otp-input"
+                    type="text"
+                    placeholder="Enter 6-digit OTP"
+                    maxLength={6}
+                    size="large"
+                  />
                 </Form.Item>
                 {sendingOTPError && (
                   <Alert
@@ -191,7 +156,7 @@ const SendOTPAndVerifyPhone = () => {
               >
                 <h2 className="header-name">Send OTP</h2>
                 <p className="otp-description">
-                  Please enter your phone number. You will receive an OTP to
+                  Please entephone-otp-verification" onClick={handleClick}>  will receive an OTP to
                   verify your phone.
                 </p>
 
@@ -237,7 +202,6 @@ const SendOTPAndVerifyPhone = () => {
           </div>
         </div>
       </div>
-      <Footer />
     </>
   );
 };

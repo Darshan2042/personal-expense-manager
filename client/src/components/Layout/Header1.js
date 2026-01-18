@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Button } from "antd";
 import "../../styles/HomeHeader.css";
-import logo from "../../../src/Images/logo.png";
+import logo from "../../Images/logo-animated-alt.svg";
 
 const Header1 = () => {
   const navigate = useNavigate();

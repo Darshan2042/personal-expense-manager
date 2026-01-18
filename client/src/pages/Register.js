@@ -12,7 +12,6 @@ import {
   PhoneFilled,
   UserOutlined,
 } from "@ant-design/icons";
-import Footer from "../components/Layout/Footer";
 import Header1 from "../components/Layout/Header1";
 
 const Register = () => {
@@ -249,7 +248,6 @@ const Register = () => {
           </div>
         </div>
       </div>
-      <Footer />
     </div>
   );
 };

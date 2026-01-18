@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import "./ContactUs.css";
-import Footer from "../../components/Layout/Footer";
 import Header1 from "../../components/Layout/Header1";
 import { Alert, message } from "antd";
 import { getResponseError } from "../../utils/getResponseError";
@@ -186,7 +185,6 @@ const ContactUs = () => {
           </div>
         </div>
       </div>
-      <Footer />
     </>
   );
 };

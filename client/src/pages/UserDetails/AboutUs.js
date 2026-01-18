@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import Header1 from "../../components/Layout/Header1";
-import Footer from "../../components/Layout/Footer";
 import "./AboutUs.css";
 
 const AboutUs = () => {
@@ -191,7 +190,6 @@ const AboutUs = () => {
           </div>
         </div>
       </div>
-      <Footer />
     </>
   );
 };

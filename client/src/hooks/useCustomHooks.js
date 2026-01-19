@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 
 /**
  * Custom hook for debouncing values
@@ -164,7 +164,7 @@ export function useAsync(asyncFunction, immediate = true) {
   const [data, setData] = useState(null);
   const [error, setError] = useState(null);
 
-  const execute = async (...params) => {
+  const execute = useCallback(async (...params) => {
     setStatus('pending');
     setData(null);
     setError(null);
@@ -179,7 +179,7 @@ export function useAsync(asyncFunction, immediate = true) {
       setStatus('error');
       throw error;
     }
-  };
+  }, [asyncFunction]);
 
   useEffect(() => {
     if (immediate) {

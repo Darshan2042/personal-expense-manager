@@ -48,7 +48,7 @@ const ContactUs = () => {
       }
 
       setLoading(true);
-      const response = await axios.post(
+      await axios.post(
         `${BASE_URL}/api/v1/user-information/contact-us`,
         formData
       );

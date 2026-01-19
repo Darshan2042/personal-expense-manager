@@ -383,7 +383,7 @@ const HomePage = () => {
       setTransactionError("Failed to export data");
       message.error("Failed to export data");
     }
-  }, [allTransection]);
+  }, [filteredTransactions, setTransactionError]);
 
   return (
     <>

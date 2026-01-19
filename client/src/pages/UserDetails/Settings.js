@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { useTheme } from '../../contexts/ThemeContext';
 import { useLocalStorage, useToggle, useClipboard } from '../../hooks/useCustomHooks';
 import Header1 from '../../components/Layout/Header1';
-import Footer from '../../components/Layout/Footer';
 import './Settings.css';
 
 const Settings = () => {

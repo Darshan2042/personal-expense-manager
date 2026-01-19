@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Header from "../../components/Layout/Header";
 import "./UserProfile.css";
-import Footer from "../../components/Layout/Footer";
 import { Link, useNavigate } from "react-router-dom";
 import { getResponseError } from "../../utils/getResponseError";
 import { Alert, message } from "antd";

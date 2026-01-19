@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from "react";
 import Header1 from "./Header1";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import Footer from "./Footer";
 import "./Home.css";
 import homepageImg from "../../../src/Images/homepage-img.png";
 
 const Home = () => {
-  const navigate = useNavigate();
   const [scrollY, setScrollY] = useState(0);
   const [isVisible, setIsVisible] = useState(false);
   const [currentFeature, setCurrentFeature] = useState(0);

@@ -72,7 +72,7 @@ export const useRequireAuth = (redirectTo = "/") => {
     if (!isAuthenticated()) {
       navigate(redirectTo);
     }
-  }, [navigate, redirectTo]);
+  }, [navigate, redirectTo, isAuthenticated]);
 
   return { isAuthenticated: isAuthenticated() };
 };
@@ -88,6 +88,6 @@ export const usePreventAuth = (redirectTo = "/user") => {
     if (isAuthenticated()) {
       navigate(redirectTo);
     }
-  }, [navigate, redirectTo]);
+  }, [navigate, redirectTo, isAuthenticated]);
 };
 

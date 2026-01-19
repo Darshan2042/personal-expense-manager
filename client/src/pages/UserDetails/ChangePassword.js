@@ -7,7 +7,6 @@ import "./ChangePassword.css";
 import Header from "../../components/Layout/Header";
 import { getResponseError } from "../../utils/getResponseError";
 import { BASE_URL } from "../../utils/baseURL";
-import Footer from "../../components/Layout/Footer";
 
 const ChangePassword = () => {
   const [loading, setLoading] = useState(false);

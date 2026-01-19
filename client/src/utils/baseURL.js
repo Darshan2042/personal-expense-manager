@@ -1,3 +1,2 @@
-export const BASE_URL = "http://localhost:8000";
-// export const BASE_URL =
-//   "https://expense-management-system-backend-s156.onrender.com";
+// Use environment variable in production, fallback to localhost in development
+export const BASE_URL = process.env.REACT_APP_API_URL || "http://localhost:8080";

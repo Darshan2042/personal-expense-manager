@@ -21,7 +21,14 @@ const app = express();
 //middlewares
 app.use(morgan("dev"));
 app.use(express.json());
-app.use(cors());
+
+// CORS configuration for production and development
+const corsOptions = {
+  origin: process.env.CLIENT_URL || "http://localhost:3000",
+  credentials: true,
+  optionsSuccessStatus: 200
+};
+app.use(cors(corsOptions));
 app.set("trust proxy", 1);
 
 //routes
@@ -38,7 +45,7 @@ app.use("/api/v1/transections", require("./routes/transectionRoutes"));
 app.use("/api/v1/user-information", require("./routes/userInfoRoutes"));
 
 //port
-const PORT = 8000 || process.env.PORT;
+const PORT = process.env.PORT || 8000;
 
 //it is a test route just to see our server is working
 app.get("/", (req, res) => {

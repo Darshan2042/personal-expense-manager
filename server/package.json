@@ -4,7 +4,7 @@
   "description": "expense-management-system is a expense tracker app",
   "main": "server.js",
   "scripts": {
-    "start": "nodemon node server.js",
+    "start": "node server.js",
     "server": "nodemon server.js",
     "dev": "nodemon server.js"
   },

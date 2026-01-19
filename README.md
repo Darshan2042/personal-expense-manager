@@ -61,7 +61,7 @@ It provides secure authentication, structured transaction management, filtering 
 ## ⚙️ Installation
 
 ### Step 1: Clone the Repository
-```bash
+
 git clone https://github.com/<your-username>/personal-expense-manager.git
 cd Expense-Management-System
 

@@ -136,7 +136,7 @@ export function usePrevious(value) {
   useEffect(() => {
     setPrevious(current);
     setCurrent(value);
-  }, [value]);
+  }, [value, current]);
 
   return previous;
 }
@@ -185,7 +185,7 @@ export function useAsync(asyncFunction, immediate = true) {
     if (immediate) {
       execute();
     }
-  }, [immediate]);
+  }, [immediate, execute]);
 
   return { execute, status, data, error, isLoading: status === 'pending' };
 }

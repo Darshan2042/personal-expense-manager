@@ -7,10 +7,7 @@ import {
   Select,
   Table,
   DatePicker,
-  Alert,
   Spin,
-  Empty,
-  Statistic,
 } from "antd";
 import {
   UnorderedListOutlined,
@@ -21,7 +18,6 @@ import {
   PlusOutlined,
   SearchOutlined,
   FilterOutlined,
-  DollarOutlined,
   RiseOutlined,
   FallOutlined,
   WalletOutlined,
@@ -30,14 +26,12 @@ import Layout from "./../components/Layout/Layout";
 import moment from "moment";
 import Analytics from "../components/Analytics";
 import { useApiWithMessage } from "../hooks/useApi";
-import { useAuth } from "../hooks/useAuth";
 import ErrorAlert from "../components/common/ErrorAlert";
 import * as XLSX from "xlsx";
 import { saveAs } from "file-saver";
 import "./TransactionsPage.css";
 
 const { RangePicker } = DatePicker;
-const { Search } = Input;
 
 // Constants
 const VIEW_TYPES = {

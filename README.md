@@ -38,23 +38,12 @@ Expense Management System is a full-stack web application designed to help users
 
 ## 🛠️ Technologies Used
 
-- **Frontend**
-  - React.js
-  - Bootstrap
-  - Ant Design
-  - CSS
-
-- **Backend**
-  - Node.js
-  - Express.js
-  - Nodemailer
-
-- **Database**
-  - MongoDB
-
-- **Security**
-  - bcrypt
-  - JSON Web Tokens (JWT)
+| Category | Technologies |
+|---------|-------------|
+| Frontend | React.js, Bootstrap, Ant Design, CSS |
+| Backend | Node.js, Express.js, Nodemailer |
+| Database | MongoDB |
+| Security | bcrypt, JWT |
 
 ---
 
@@ -130,19 +119,14 @@ The application will run at:
 
 ---
 
-## 🚀 Deployment
-
-### **Live Demo**
-
-- **Frontend:** https://fastidious-tapioca-4b63d5.netlify.app
-- **Backend:** https://personal-expense-manager-owt6.onrender.com
-
-### **Deployment Guides**
-
-For detailed deployment instructions, see:
-- [DEPLOYMENT.md](DEPLOYMENT.md) - Complete deployment guide
-- [QUICK-DEPLOY.md](QUICK-DEPLOY.md) - Quick deployment reference
-
----
 
 ## 📸 Screenshots 
+<img width="1908" height="973" alt="image" src="https://github.com/user-attachments/assets/67eedab1-9b5d-4a4b-b39c-f245097db9ee" />
+
+<img width="1907" height="969" alt="image" src="https://github.com/user-attachments/assets/7ff5a905-d338-47a4-a60c-519d4d4e1715" />
+
+<img width="1908" height="969" alt="image" src="https://github.com/user-attachments/assets/fdf889e4-1a4b-4442-a377-3a8f85fb232d" />
+
+<img width="1910" height="967" alt="image" src="https://github.com/user-attachments/assets/8bede462-f6fd-4b7c-a8ad-d98156b016e0" />
+
+<img width="1912" height="971" alt="image" src="https://github.com/user-attachments/assets/9e065c91-2079-4b12-ba4d-3c3bd313cd15" />

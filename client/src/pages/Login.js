@@ -43,10 +43,6 @@ const Login = () => {
     }
   };
 
-  const handleClickLoginWithGoogle = async () => {
-    window.open(`${BASE_URL}/auth/google`, "_self");
-  };
-
   //prevent for loggedin user
   useEffect(() => {
     if (localStorage.getItem("user")) {
@@ -128,14 +124,7 @@ const Login = () => {
                   Not a user? <Link to="/register">SignUp!</Link>
                 </div>
               </div>
-              <div className="line"></div>
             </Form>
-            <button
-              className="login-with-google-btn"
-              onClick={handleClickLoginWithGoogle}
-            >
-              Login with Google
-            </button>
           </div>
         </div>
       </div>
